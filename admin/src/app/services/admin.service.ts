@@ -19,7 +19,7 @@ export class AdminService {
 
   login_admin(data):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(this.url+'login_admin',data,{headers});
+    return this._http.post(this.url+'login_admin',data,{headers:headers});
 
   }
 
