@@ -9,6 +9,6 @@ var multiparty = require('connect-multiparty');
 var path = multiparty({uploadDir: './uploads/productos'});
 
 
-api.post('/registro_product_admin',[auth.auth,path],productoController.registro_product_admin);
+api.post('/registro_producto_admin',[auth.auth,path],productoController.registro_producto_admin);
 
 module.exports = api;

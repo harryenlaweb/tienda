@@ -37,7 +37,7 @@ export class CreateProductoComponent implements OnInit {
       console.log(this.producto);
       console.log(this.file); 
 
-      this._productoService.registro_product_admin(this.producto,this.file,this.token).subscribe(
+      this._productoService.registro_producto_admin(this.producto,this.file,this.token).subscribe(
         response=>{
           console.log(response);
           

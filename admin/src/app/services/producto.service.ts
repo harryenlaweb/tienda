@@ -16,7 +16,7 @@ export class ProductoService {
     this.url = GLOBAL.url;
   }
 
-  registro_product_admin(data,file,token):Observable<any>{
+  registro_producto_admin(data,file,token):Observable<any>{
     let headers = new HttpHeaders({'Authorization':token});
 
     const fd = new FormData();
@@ -28,7 +28,7 @@ export class ProductoService {
     fd.append('categoria',data.categoria);
     fd.append('portada',file);    
 
-    return this._http.post(this.url+'registro_product_admin',fd,{headers:headers});
+    return this._http.post(this.url+'registro_producto_admin/',fd,{headers:headers});
 
   }
 }
