@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         position: 'topRight',
         message: 'Los datos del formulario no son validos',        
 
-      })
+      });
     }
   }
 
