@@ -15,6 +15,8 @@ import { IndexClienteComponent } from './components/clientes/index-cliente/index
 import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
+import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
+import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { CreateProductoComponent } from './components/productos/create-producto/
     IndexClienteComponent,
     CreateClienteComponent,
     EditClienteComponent,
-    CreateProductoComponent
+    CreateProductoComponent,
+    IndexProductoComponent,
+    UpdateProductoComponent
   ],
   imports: [
     BrowserModule,
