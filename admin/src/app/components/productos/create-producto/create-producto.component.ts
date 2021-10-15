@@ -35,6 +35,8 @@ export class CreateProductoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
   registro(registroForm){
     if(registroForm.valid){
       if(this.file == undefined){
