@@ -67,8 +67,32 @@
                                     <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OPCIONES</button>
                                     <div class="dropdown-menu">
                                       <a class="dropdown-item" [routerLink]="['/panel/productos',item._id]" >Editar producto</a>
+                                      <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+item._id" >Eliminar producto</a>
                                       
                                     </div>
+                                </div>
+
+                                <!--VENTANA MODAL DE CONFIRMACION PARA ELIMINAR-->
+                                <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Confirmación de eliminación  </h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                -     </div>
+                                      <div class="modal-body">
+                                        <p class="fs-sm">{{item.titulo}} desea eliminar este producto?</p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                                        <button *ngIf="!load_btn" class="btn btn-primary btn-shadow btn-sm" (click)="eliminar(item._id)" type="button">Si, eliminar</button>
+                                        <button *ngIf="load_btn" type="button" class="btn btn-secondary" disabled>
+                                          <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                                          Eliminando...
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                             </td>
                         </tr>
