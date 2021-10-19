@@ -1,6 +1,7 @@
 'use strict'
 
 var Producto = require('../models/producto');
+var Inventario = require('../models/inventario');
 var fs = require('fs');
 var path = require('path');
 
@@ -18,7 +19,14 @@ const registro_producto_admin = async function(req,res){
             
             let reg = await Producto.create(data);
 
-            res.status(200).send({data:reg});
+            let inventario = await Inventario.create({
+                admin: req.user.sub,
+                cantidad:data.stock,
+                proveedor: 'Primer registro',
+                producto: reg._id,
+            })
+
+            res.status(200).send({data:reg,inventario: inventario});
         }else{
             res.status(500).send({message: 'NoAccess'});
         }
@@ -155,6 +163,51 @@ const eliminar_producto_admin = async function(req,res){
     }
 }
 
+const listar_inventario_producto_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+        
+            var id = req.params['id'];   
+            
+            var reg = await Inventario.find({producto: id}).populate('admin');
+            res.status(200).send({data:reg});            
+
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }
+
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const elimnar_inventario_producto_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+            //Obtener id del inventario
+            var id = req.params['id'];            
+            //eliminar inventario
+            let reg = await Inventario.findByIdAndRemove({_id:id});
+            //obtener el registro del producto
+            let prod = await Producto.findById({_id:reg.producto});
+            //calcular el nuevo stock
+            let nuevo_stock = parseInt(prod.stock) - parseInt(reg.cantidad);
+            //actualizacion del nuevo stock al producto
+            let producto = await Producto.findOneAndUpdate({_id:reg.producto},{
+                stock: nuevo_stock,
+            })
+
+            res.status(200).send({data: producto});
+
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }
+
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
 module.exports = {
     registro_producto_admin,
     listar_productos_admin,
@@ -162,4 +215,6 @@ module.exports = {
     obtener_producto_admin,
     actualizar_producto_admin,
     eliminar_producto_admin,
+    listar_inventario_producto_admin,
+    elimnar_inventario_producto_admin,
 }
