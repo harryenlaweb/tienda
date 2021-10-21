@@ -64,18 +64,15 @@ export class CreateProductoComponent implements OnInit {
                 message: 'Se registro correctamente el nuevo producto.',        
       
             });
-
             this.load_btn = false;
 
-            this._router.navigate(['/panel/productos'])
-            
+            this._router.navigate(['/panel/productos'])            
           },
           error=>{
             console.log(error);
             this.load_btn = false;
           }
-        );      
-
+        ); 
       }
     }else{
       iziToast.show({
