@@ -19,6 +19,27 @@ export class CuponService {
   registro_cupon_admin(data,token):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url+'registro_cupon_admin/',data,{headers:headers});
-
   }
+
+  listar_cupones_admin(filtro,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'listar_cupones_admin/'+filtro,{headers:headers});
+  } 
+
+  obtener_cupon_admin(id,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_cupon_admin/'+id,{headers:headers});
+  }
+
+  
+  actualizar_cupon_admin(id,data,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.put(this.url+'actualizar_cupon_admin/'+id,data,{headers:headers});
+  }
+
+  
+  eliminar_cupon_admin(id,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.delete(this.url+'eliminar_cupon_admin/'+id,{headers:headers});
+  } 
 }

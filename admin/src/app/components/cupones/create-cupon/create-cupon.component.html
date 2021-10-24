@@ -12,11 +12,11 @@
 <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)" >
     <div class="card box-shadow-sm">
             <div class="card-header">
-                <h5 style="margin-bottom: 0px;">Registro de cliente</h5>
+                <h5 style="margin-bottom: 0px;">Registro de cupón</h5>                
             </div>
             <div class="card-body">            
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 form-group">cliente
+                    <div class="col-lg-3 col-md-6 form-group">cupon
                         <label for="validationCustom01" class="form-label">Código de cupón</label>
                         <input class="form-control" type="text" placeholder="Código de cupón" required name="codigo" [(ngModel)]="cupon.codigo">
                     
@@ -46,7 +46,7 @@
                     <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
                     Creando...
                 </button>
-                <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
+                <a [routerLink]="['/panel/cupones']" class="btn btn-warning">Regresar</a>
             </div>
     </div> 
 </form>
