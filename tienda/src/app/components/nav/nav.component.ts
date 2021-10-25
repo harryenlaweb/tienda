@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  public token;
+
+  constructor(
+    private _clienteService: ClienteService,
+  ) { 
+    this.token = localStorage.getItem('token');
+    this._clienteService.obtener_cliente_guest(response.data._id,response.token).subscribe(
+      response => {
+        console.log(response);
+        
+      },
+      error => {
+        console.log(error);
+        
+      }
+
+    )
+  }
 
   ngOnInit(): void {
   }
