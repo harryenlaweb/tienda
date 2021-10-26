@@ -18,12 +18,41 @@
         <!-- Toolbar -->
         <div class="d-flex align-items-center order-lg-3">
           <ul class="nav nav-tools flex-nowrap">
-            <li class="nav-item d-lg-block d-none mb-0">
-              <a [routerLink]="['/login']" class="nav-tool">
-                <i class="cxi-profile nav-tool-icon"></i>
-                <span class="nav-tool-label">Iniciar sesión</span>
-              </a>
-            </li>
+            
+              <ng-container *ngIf="user_lc == undefined">
+                <li class="nav-item d-lg-block d-none mb-0">
+                  <a [routerLink]="['/login']" class="nav-tool">
+                    <i class="cxi-profile nav-tool-icon"></i>
+                    <span class="nav-tool-label">Iniciar sesión</span>
+                  </a>
+                </li>
+              </ng-container>
+              <ng-container *ngIf="user_lc" >
+                <li class="nav-item d-lg-block d-none dropdown">
+                  <a class="nav-tool dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">
+                    <i class="cxi-profile nav-tool-icon"></i>
+                    <span class="nav-tool-label">{{user_lc.nombres}} {{user_lc.apellidos}}</span>
+                  </a>
+                  <div class="dropdown-menu">                    
+                    <a href="#" class="dropdown-item">
+                      <i class="cxi-profile mr-2"></i>
+                      Profile
+                      <span class="badge badge-pill badge-danger ml-2">3</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i class="cxi-comment mr-2"></i>
+                      Messages
+                      <span class="badge badge-pill badge-success ml-2">5</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i class="cxi-external-link mr-2"></i>
+                      Settings
+                      <span class="badge badge-pill badge-warning ml-2">1</span>
+                    </a>
+                  </div>
+                </li>
+              </ng-container>
+            
             <li class="divider-vertical mb-0 d-lg-block d-none"></li>
             <li class="nav-item align-self-center mb-0">
               <a href="#" class="nav-tool pr-lg-0" data-toggle="offcanvas" data-target="cart">
