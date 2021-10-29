@@ -34,20 +34,19 @@
                     <span class="nav-tool-label">{{user_lc.nombres}} {{user_lc.apellidos}}</span>
                   </a>
                   <div class="dropdown-menu">                    
-                    <a href="#" class="dropdown-item">
+                    <a [routerLink]="['/cuenta/perfil']" routerLinkActive="active"  class="dropdown-item">
                       <i class="cxi-profile mr-2"></i>
-                      Profile
-                      <span class="badge badge-pill badge-danger ml-2">3</span>
+                      Perfil
+                      <!-- <span class="badge badge-pill badge-danger ml-2">3</span> -->
                     </a>
                     <a href="#" class="dropdown-item">
                       <i class="cxi-comment mr-2"></i>
                       Messages
                       <span class="badge badge-pill badge-success ml-2">5</span>
                     </a>
-                    <a href="#" class="dropdown-item">
-                      <i class="cxi-external-link mr-2"></i>
-                      Settings
-                      <span class="badge badge-pill badge-warning ml-2">1</span>
+                    <a (click)="logout()" style="cursor: pointer;" class="dropdown-item">
+                      <i  class="cxi-logout mr-2"></i>
+                      Cerrar Sesión
                     </a>
                   </div>
                 </li>

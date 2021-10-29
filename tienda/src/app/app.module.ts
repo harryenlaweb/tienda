@@ -12,6 +12,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
+import { SiderbarComponent } from './components/usuario/siderbar/siderbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PerfilComponent } from './components/usuario/perfil/perfil.component';
     NavComponent,
     FooterComponent,
     LoginComponent,
-    PerfilComponent
+    PerfilComponent,
+    SiderbarComponent
   ],
   imports: [
     BrowserModule,
