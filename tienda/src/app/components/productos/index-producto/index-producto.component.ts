@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var noUiSlider;
@@ -19,20 +20,43 @@ export class IndexProductoComponent implements OnInit {
   public url;
   public load_data = true;  
 
+  public route_categoria;
+
   constructor(
     private _clienteService:ClienteService,
+    private _route: ActivatedRoute,
   ) {
     this.url = GLOBAL.url;
     this._clienteService.obtener_config_publico().subscribe(
       response=>{ this.config_global = response.data}
     )
-    
-    this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
-      response=>{
-        this.productos = response.data;
-        this.load_data = false;
+
+    this._route.params.subscribe(
+      params=>{
+        this.route_categoria = params['categoria'];
+        if(this.route_categoria){
+          this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+            response => {
+              this.productos = response.data;
+              this.productos = this.productos.filter(item=>item.categoria.toLowerCase() == this.route_categoria);
+              this.load_data = false;
+            }
+          )
+          
+        }else{
+          this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+            response => {
+              this.productos = response.data;
+              this.load_data = false;
+            }
+          )
+        }
+        
+        
       }
     )
+    
+    
    }
 
   ngOnInit(): void {
@@ -115,6 +139,7 @@ export class IndexProductoComponent implements OnInit {
         response=>{
           this.productos = response.data;
           this.productos = this.productos.filter(item=>item.categoria == this.filter_cat_productos);
+          this.load_data = false;
         }
       )
       
