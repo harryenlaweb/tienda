@@ -82,4 +82,25 @@ export class IndexProductoComponent implements OnInit {
     )
   }
 
+  buscar_precios(){
+
+    this._clienteService.listar_productos_publico(this.filter_producto).subscribe(
+      response=>{
+        this.productos = response.data;   
+        
+        let min = parseInt($('.cs-range-slider-value-min').val());
+        let max = parseInt($('.cs-range-slider-value-max').val());
+
+        console.log(min);
+        console.log(max);
+
+        this.productos = this.productos.filter(((item)=>{
+          return item.precio >= min && item.precio <=max
+        }))
+      }
+    )
+    
+    
+  }
+
 }
