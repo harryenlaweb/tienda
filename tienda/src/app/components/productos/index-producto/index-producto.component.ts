@@ -21,6 +21,8 @@ export class IndexProductoComponent implements OnInit {
   public load_data = true;  
 
   public route_categoria;
+  public page = 1;
+  public pageSize = 15;
 
   constructor(
     private _clienteService:ClienteService,
@@ -141,10 +143,8 @@ export class IndexProductoComponent implements OnInit {
           this.productos = this.productos.filter(item=>item.categoria == this.filter_cat_productos);
           this.load_data = false;
         }
-      )
-      
-    }
-    
+      )      
+    }    
   }
 
   reset_productos(){
