@@ -309,6 +309,14 @@ const listar_productos_publico = async function(req,res){
 
 }
 
+const obtener_productos_slug_publico = async function(req,res){
+    var slug = req.params['slug'];
+
+    let reg = await Producto.findOne({slug: slug});
+    res.status(200).send({data: reg});
+
+}
+
 
 
 module.exports = {
@@ -325,4 +333,5 @@ module.exports = {
     agregar_imagen_galeria_admin,
     eliminar_imagen_galeria_admin,
     listar_productos_publico,
+    obtener_productos_slug_publico,
 }
