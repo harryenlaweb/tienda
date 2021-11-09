@@ -20,4 +20,9 @@ export class GuestService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.url+'obtener_productos_slug_publico/'+slug,{headers:headers});
   }
+
+  listar_productos_recomendados_publico(categoria):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url+'listar_productos_recomendados_publico/'+categoria,{headers:headers});
+  }
 }
