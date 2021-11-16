@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var noUiSlider;
 declare var $:any;
+declare var iziToast;
 
 @Component({
   selector: 'app-index-producto',
@@ -26,10 +27,19 @@ export class IndexProductoComponent implements OnInit {
 
   public sort_by = 'Defecto';
 
+  public carrito_data : any = {
+    variedad: '',
+    cantidad: 1
+  };
+
+  public btn_cart = false;
+  public token;
+
   constructor(
     private _clienteService:ClienteService,
     private _route: ActivatedRoute,
   ) {
+    this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
     this._clienteService.obtener_config_publico().subscribe(
       response=>{ this.config_global = response.data}
@@ -223,6 +233,43 @@ export class IndexProductoComponent implements OnInit {
         return 0;
       });
     }
+  }
+
+  agregar_producto(producto){
+    let data ={
+      producto: producto._id,
+      cliente: localStorage.getItem('_id'),
+      cantidad: 1,
+      variedad: producto.variedades[0].titulo
+    }
+    this.btn_cart = true;
+    this._clienteService.agregar_carrito_cliente(data,this.token).subscribe(
+      response=>{
+        if(response.data == undefined){
+          iziToast.show({
+              title: 'ERROR',
+              titleColor: '#FF0000',
+              color: '#FFF',
+              class: 'text-danger',
+              position: 'topRight',
+              message: 'El producto ya existe en el carrito'
+          });
+          this.btn_cart = false;
+        }else{
+          console.log(response);
+          iziToast.show({
+              title: 'SUCCESS',
+              titleColor: '#1DC74C',
+              color: '#FFF',
+              class: 'text-success',
+              position: 'topRight',
+              message: 'Se agregó el producto al carrito.',        
+    
+          });
+          this.btn_cart = false;
+          }
+      }
+    )
   }
 
 }
