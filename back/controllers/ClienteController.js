@@ -246,14 +246,9 @@ const actualizar_perfil_cliente_guest = async function(req,res){
 
  const registro_direccion_cliente = async function(req,res){
     if(req.user){
-        if(req.user.role == 'admin'){
-            var data = req.body;
-            let reg = await Direccion.create(data);
-            res.status(200).send({data:reg});
-                
-        }else{
-            res.status(500).send({message: 'NoAccess'});
-        }
+        var data = req.body;
+        let reg = await Direccion.create(data);
+        res.status(200).send({data:reg});
 
     }else{
         res.status(500).send({message: 'NoAccess'});
