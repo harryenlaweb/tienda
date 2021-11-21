@@ -3,6 +3,8 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { io } from "socket.io-client";
 declare var iziToast;
+declare var Cleave;
+declare var StickySidebar;
 
 @Component({
   selector: 'app-carrito',
@@ -20,6 +22,8 @@ export class CarritoComponent implements OnInit {
   public total_pagar = 0;
   public socket = io('http://localhost:4201');
 
+  public direccion_principal : any = {};
+
   constructor(
     private _clienteService : ClienteService
   ) {
@@ -36,6 +40,34 @@ export class CarritoComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      new Cleave('#cc-number', {
+          creditCard: true,
+            onCreditCardTypeChanged: function (type) {
+                // update UI ...
+            }
+      });
+      new Cleave('#cc-exp-date', {
+          date: true,
+          datePattern: ['m', 'y']
+      });
+
+      var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
+
+    })
+
+    this.get_direccion_principal();
+  }
+
+  get_direccion_principal(){
+    this._clienteService.obtener_direccion_principal_cliente(localStorage.getItem('_id'), this.token).subscribe(
+      response=>{
+        this.direccion_principal = response.data;   
+        console.log(this.direccion_principal);
+             
+        
+      }
+    )
   }
 
   calcular_carrito(){
