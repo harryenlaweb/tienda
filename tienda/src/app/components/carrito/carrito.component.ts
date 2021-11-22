@@ -3,6 +3,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { io } from "socket.io-client";
 import { GuestService } from 'src/app/services/guest.service';
+import { Router } from '@angular/router';
 declare var iziToast;
 declare var Cleave;
 declare var StickySidebar;
@@ -39,7 +40,8 @@ export class CarritoComponent implements OnInit {
 
   constructor(
     private _clienteService : ClienteService,
-    private _guestService: GuestService
+    private _guestService: GuestService,
+    private _router:Router
   ) {
     
     this.idcliente = localStorage.getItem('_id');
@@ -83,10 +85,10 @@ export class CarritoComponent implements OnInit {
   
           return actions.order.create({
             purchase_units : [{
-              description : 'Nombre del pago',
+              description : 'Pago en Mi Tienda',
               amount : {
                 currency_code : 'USD',
-                value: 999
+                value: this.subtotal
               },
             }]
           });        
@@ -97,12 +99,11 @@ export class CarritoComponent implements OnInit {
         console.log(order);
         
         this.venta.transaccion = order.purchase_units[0].payments.captures[0].id;
-        console.log(this.dventa);
 
         this.venta.detalles = this.dventa;
         this._clienteService.registro_compra_cliente(this.venta,this.token).subscribe(
           response=>{
-            console.log(response);
+            this._router.navigate(['/']);
             
           }
         );

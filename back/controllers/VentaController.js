@@ -3,6 +3,13 @@ var DVenta = require('../models/dventa');
 var Producto = require('../models/producto');
 var Carrito = require('../models/carrito');
 
+var fs = require('fs');
+var handlebars = require('handlebars');
+var ejs = require('ejs');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+var path = require('path');
+
 const registro_compra_cliente = async function(req,res){
     if(req.user){
         var data = req.body;
