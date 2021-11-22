@@ -37,6 +37,8 @@ export class CarritoComponent implements OnInit {
 
   public venta : any = {};
   public dventa : Array<any>=[];
+  public error_cupon = '';
+  public descuento = 0;
 
   constructor(
     private _clienteService : ClienteService,
@@ -103,8 +105,11 @@ export class CarritoComponent implements OnInit {
         this.venta.detalles = this.dventa;
         this._clienteService.registro_compra_cliente(this.venta,this.token).subscribe(
           response=>{
-            this._router.navigate(['/']);
-            
+            this._clienteService.enviar_correo_compra_cliente(response.venta._id,this.token).subscribe(
+              response=>{
+                this._router.navigate(['/']);
+              }
+            )            
           }
         );
         
@@ -189,6 +194,38 @@ export class CarritoComponent implements OnInit {
 
     console.log(this.venta);
     
+  }
+
+  validar_cupon(){
+    if(this.venta.cupon){
+      if(this.venta.cupon.toString().length <= 25 ){ //si el cupon tiene que tener 30 caracteres
+        //SI ES VALIDO
+        
+        this._clienteService.validar_cupon_cliente(this.venta.cupon,this.token).subscribe(
+          response=>{
+            if(response.data != undefined){
+              //hago descuento
+              this.error_cupon = '';
+              if(response.data.tipo == 'Valor fijo'){
+                this.descuento = response.data.valor;
+                this.total_pagar = this.total_pagar - this.descuento;
+              }else if(response.data.tipo == 'Porcentaje'){
+                this.descuento = (this.total_pagar * response.data.valor)/100;
+                this.total_pagar = this.total_pagar - this.descuento;
+              }
+            }else{
+              this.error_cupon = 'El cupón no se pudo canjear';
+            }          
+            
+          }
+        );
+      }else{
+        //NO ES VALIDO
+        this.error_cupon = 'El cupón deber ser menos de 25 caracteres';
+      }
+    }else{
+      this.error_cupon = 'El cupón no es válido';
+    }
   }
 
 }
