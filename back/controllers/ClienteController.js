@@ -301,14 +301,16 @@ const cambiar_direccion_principal_cliente = async function(req,res){
 const obtener_direccion_principal_cliente = async function(req,res){
     if(req.user){
         
-        var id = req.params['id'];        
+        var id = req.params['id']; 
+        var direccion = undefined;
 
-        let direccion = await Direccion.findOne({cliente:id,principal:true});
-        console.log(direccion);
+        direccion = await Direccion.findOne({cliente:id,principal:true});
         
-        
-        res.status(200).send({data:direccion});
-
+        if(direccion == undefined){
+            res.status(200).send({data:undefined});
+        }else{
+            res.status(200).send({data:direccion});
+        }
     }else{
         res.status(500).send({message: 'NoAccess'});
     }

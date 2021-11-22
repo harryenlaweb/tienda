@@ -107,4 +107,9 @@ export class ClienteService {
     return this._http.get(this.url+'obtener_direccion_principal_cliente/'+id,{headers:headers});
   } 
 
+  registro_compra_cliente(data,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url+'registro_compra_cliente',data,{headers:headers});
+  }
+
 }
