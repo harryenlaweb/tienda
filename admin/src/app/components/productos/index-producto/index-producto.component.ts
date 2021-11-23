@@ -4,7 +4,6 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 
-declare var iziToast;
 declare var $:any;
 declare var iziToast;
 
