@@ -110,10 +110,6 @@ export class IndexProductoComponent implements OnInit {
         }else{
           this.descuento_activo = undefined;          
         }
-      },
-      error=>{
-        console.log(error);
-        
       }
     )
   }

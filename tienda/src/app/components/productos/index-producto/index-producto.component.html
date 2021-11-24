@@ -15,7 +15,18 @@
 
         <div class="row mb-5" *ngIf="descuento_activo != undefined">
           <div class="col-12">
-            <img [src]="url+'obtener_banner_descuento/'+descuento_activo.banner" style="width: 100% !important;">
+            <div class="py-5 px-md-5 px-4 bg-size-cover bg-position-center-y" style="background-image: url({{url}}obtener_banner_descuento/{{descuento_activo.banner}});">
+              <div class="mt-md-3 mb-5 pb-5 p-md-2" style="max-width: 14rem;">
+                <h3 class="mb-2 pb-1 font-size-sm text-uppercase">{{descuento_activo.fecha_inicio}} <br>
+                  hasta <br> {{descuento_activo.fecha_fin}}</h3>
+                <h2 class="pb-3">{{descuento_activo.titulo}}</h2>
+                <a class="btn btn-primary mb-5">Todos los productos</a>
+              </div>
+              <div class="mb-md-3 pt-5 p-md-2">
+                <h3 class="mb-2 pb-1 font-size-sm text-uppercase">Descuento de {{descuento_activo.descuento}}%</h3>
+                
+              </div>
+            </div>            
             
           </div>
         </div>
@@ -227,7 +238,7 @@
                         <img [src]="url+'obtener_portada/'+item.portada" alt="Product image">
                       </a>                     
                       <div class="card-product-widgets-top">
-                        <span class="badge product-badge badge-danger">-{{descuento_activo.descuento}}%</span>
+                        <span class="badge product-badge badge-danger" *ngIf="descuento_activo">-{{descuento_activo.descuento}}%</span>
                         <div class="star-rating ml-auto">
                           <i class="sr-star cxi-star-filled active"></i>
                           <i class="sr-star cxi-star-filled active"></i>

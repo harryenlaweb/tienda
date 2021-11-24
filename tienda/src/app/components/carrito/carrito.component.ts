@@ -40,6 +40,8 @@ export class CarritoComponent implements OnInit {
   public error_cupon = '';
   public descuento = 0;
 
+  public descuento_activo : any = undefined;
+
   constructor(
     private _clienteService : ClienteService,
     private _guestService: GuestService,
@@ -59,6 +61,17 @@ export class CarritoComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this._guestService.obtener_descuento_activo().subscribe(      
+      response=>{        
+        if(response.data != undefined){
+          this.descuento_activo = response.data[0];          
+        }else{
+          this.descuento_activo = undefined;          
+        }
+      }      
+    )
+
     this.init_Data();
     setTimeout(()=>{
       new Cleave('#cc-number', {
@@ -122,6 +135,8 @@ export class CarritoComponent implements OnInit {
         
       }
     }).render(this.paypalElement.nativeElement);
+
+    
   }
 
   init_Data(){
@@ -161,10 +176,16 @@ export class CarritoComponent implements OnInit {
 
   calcular_carrito(){
     this.subtotal = 0;
-    this.carrito_arr.forEach(element => {      
-      this.subtotal = this.subtotal + parseInt(element.producto.precio);
-    });
-    this.total_pagar = this.subtotal;
+    if(this.descuento_activo == undefined){
+      this.carrito_arr.forEach(element => {
+        this.subtotal = this.subtotal + parseInt(element.producto.precio);
+      })
+    }else if(this.descuento_activo != undefined){ 
+      this.carrito_arr.forEach(element => {
+        let new_precio = Math.round(parseInt(element.producto.precio) - (parseInt(element.producto.precio)*this.descuento_activo.descuento)/100);
+        this.subtotal = this.subtotal + new_precio;
+      })
+    }
   }
 
   eliminar_item(id){
