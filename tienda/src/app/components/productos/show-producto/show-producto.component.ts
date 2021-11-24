@@ -21,6 +21,8 @@ export class ShowProductoComponent implements OnInit {
   public url;
   public productos_rec : Array<any> = [];
 
+  public descuento_activo : any = undefined;
+
   public carrito_data : any = {
     variedad: '',
     cantidad: 1
@@ -113,7 +115,21 @@ export class ShowProductoComponent implements OnInit {
           }
         }
       });      
-    },500)    
+    },500) 
+    
+    this._guestService.obtener_descuento_activo().subscribe(      
+      response=>{        
+        if(response.data != undefined){
+          this.descuento_activo = response.data[0];          
+        }else{
+          this.descuento_activo = undefined;          
+        }
+      },
+      error=>{
+        console.log(error);
+        
+      }
+    )
   }
 
   agregar_producto(){

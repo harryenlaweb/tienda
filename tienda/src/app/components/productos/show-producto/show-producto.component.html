@@ -298,6 +298,14 @@
       </div>
 
       <section class="container py-md-6 py-5 mb-2">
+        <div class="row mb-5" *ngIf="descuento_activo != undefined">
+          <div class="col-12">
+            <img [src]="url+'obtener_banner_descuento/'+descuento_activo.banner" style="width: 100% !important;">
+            
+          </div>
+        </div>
+
+
         <div class="row">
           <div class="col-lg-7 col-md-8 mb-md-0 mb-5">
             <div class="row mb-sm-5 mb-4 pb-2 pb-md-4">

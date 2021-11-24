@@ -26,6 +26,11 @@ export class GuestService {
     return this._http.get(this.url+'listar_productos_recomendados_publico/'+categoria,{headers:headers});
   }
 
+  obtener_descuento_activo():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url+'obtener_descuento_activo/',{headers:headers});
+  }
+
   get_Regiones():Observable<any>{    
     return this._http.get('./assets/regiones.json');
   }
@@ -41,4 +46,6 @@ export class GuestService {
   get_Envios():Observable<any>{    
     return this._http.get('./assets/envios.json');
   }
+
+  
 }
