@@ -20,6 +20,7 @@ import { GaleriaProductoComponent } from "./components/productos/galeria-product
 import { IndexDescuentoComponent } from "./components/descuento/index-descuento/index-descuento.component";
 import { CreateDescuentoComponent } from "./components/descuento/create-descuento/create-descuento.component";
 import { EditDescuentoComponent } from "./components/descuento/edit-descuento/edit-descuento.component";
+import { IndexContactoComponent } from "./components/contacto/index-contacto/index-contacto.component";
 
 const appRoute : Routes = [ //aca creamos todas las rutas
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -46,6 +47,8 @@ const appRoute : Routes = [ //aca creamos todas las rutas
         
 
         {path: 'configuraciones', component: ConfigComponent, canActivate: [AdminGuard]},
+
+        {path: 'contactos', component: IndexContactoComponent, canActivate: [AdminGuard]},
     ]},
     {path: 'login', component: LoginComponent}
 
