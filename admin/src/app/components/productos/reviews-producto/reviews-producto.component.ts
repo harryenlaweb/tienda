@@ -48,9 +48,7 @@ export class ReviewsProductoComponent implements OnInit {
               this._productoService.obtener_reviews_producto_publico(this.producto._id).subscribe(
                 response=>{
                   this.reviews = response.data;
-                  console.log(this.reviews);
-                  
-                  
+                  console.log(this.reviews);                  
                 }
               )
             }

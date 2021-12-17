@@ -271,7 +271,7 @@ const obtener_detalles_ordenes_cliente = async function(req,res){
         var id = req.params['id']; 
 
         try {
-            let venta = await Venta.findById({_id:id}).populate('direccion');
+            let venta = await Venta.findById({_id:id}).populate('direccion').populate('cliente');
             let detalles = await Dventa.find({venta:id}).populate('producto');
 
             res.status(200).send({data:venta, detalles:detalles});

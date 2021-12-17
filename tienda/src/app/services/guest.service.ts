@@ -46,6 +46,11 @@ export class GuestService {
     return this._http.post(this.url+'enviar_mensaje_contacto/',data,{headers:headers});
   }
 
+  obtener_reviews_producto_publico(id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url+'obtener_reviews_producto_publico/'+id,{headers:headers});
+
+  }
 
   get_Regiones():Observable<any>{    
     return this._http.get('./assets/regiones.json');
@@ -62,6 +67,7 @@ export class GuestService {
   get_Envios():Observable<any>{    
     return this._http.get('./assets/envios.json');
   }
+  
 
   
 }

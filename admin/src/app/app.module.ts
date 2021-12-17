@@ -29,6 +29,8 @@ import { EditDescuentoComponent } from './components/descuento/edit-descuento/ed
 import { IndexDescuentoComponent } from './components/descuento/index-descuento/index-descuento.component';
 import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
 import { ReviewsProductoComponent } from './components/productos/reviews-producto/reviews-producto.component';
+import { IndexVentasComponent } from './components/ventas/index-ventas/index-ventas.component';
+import { DetalleVentasComponent } from './components/ventas/detalle-ventas/detalle-ventas.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { ReviewsProductoComponent } from './components/productos/reviews-product
     EditDescuentoComponent,
     IndexDescuentoComponent,
     IndexContactoComponent,
-    ReviewsProductoComponent
+    ReviewsProductoComponent,
+    IndexVentasComponent,
+    DetalleVentasComponent
   ],
   imports: [
     BrowserModule,

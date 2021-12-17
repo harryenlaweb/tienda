@@ -94,5 +94,20 @@ export class AdminService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.put(this.url+'cerrar_mensaje_admin/'+id,data,{headers:headers});
   }
+
+  obtener_ventas_admin(desde,hasta,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_ventas_admin/'+desde+'/'+hasta,{headers:headers});
+  }
     
+  obtener_detalles_ordenes_cliente(id,token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_detalles_ordenes_cliente/'+id,{headers:headers});
+  }
+
+  //********KPI******* */
+  kpi_ganancias_mensuales_admin(token):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'kpi_ganancias_mensuales_admin/',{headers:headers});
+  }
 }
